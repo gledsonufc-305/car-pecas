@@ -1,0 +1,12 @@
+{
+  "name": "car-pecas-frontend",
+  "version": "1.0.0",
+  "description": "Painel Car Peças",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
+}
