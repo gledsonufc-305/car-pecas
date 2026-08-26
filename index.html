@@ -4,124 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Peças — Painel de Gestão Integrada</title>
-    <!-- Tailwind CSS v4 Oficial -->
-    <script src="https://unpkg.com"></script>
-    <!-- Chart.js Oficial para Relatórios Gráficos -->
-    <script src="https://jsdelivr.net"></script>
-    <!-- Fonte Inter Google Fonts -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS via CDN para estilização moderna -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para ícones modernos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-[#0b0f19] text-slate-100 antialiased min-h-screen flex flex-col md:flex-row select-none">
+<body class="bg-gray-50 text-gray-800 flex h-screen overflow-hidden">
 
-    <!-- MENU LATERAL DA OFICINA -->
-    <aside class="w-full md:w-68 bg-[#111827] text-white flex flex-col flex-shrink-0 border-r border-slate-800/60">
-        <!-- LOGO VETORIAL DIGITALIZADA -->
-        <div class="p-7 flex flex-col items-center border-b border-slate-800/40">
-            <div class="relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-                <svg class="relative w-28 h-auto text-slate-100 drop-shadow-lg" viewBox="0 0 200 80" fill="none" xmlns="http://w3.org">
-                    <path d="M20 52 C40 22, 70 18, 100 18 C130 18, 160 22, 180 52" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
-                    <path d="M35 52 L45 43 L155 43 L165 52 Z" fill="currentColor" opacity="0.2"/>
-                    <circle cx="55" cy="52" r="4" fill="#3b82f6"/>
-                    <circle cx="145" cy="52" r="4" fill="#3b82f6"/>
-                </svg>
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gray-900 text-white flex flex-col justify-between hidden md:flex">
+        <div>
+            <!-- Logo / Header da Sidebar -->
+            <div class="p-5 flex items-center gap-3 border-b border-gray-800">
+                <div class="bg-blue-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-gears text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg tracking-wide">CAR PEÇAS</h1>
+                    <p class="text-xs text-gray-400">Peças & Serviços</p>
+                </div>
             </div>
-            <h1 class="text-xl font-bold tracking-tight text-white mt-3 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">CAR PEÇAS</h1>
-            <p class="text-[10px] text-blue-400 font-bold tracking-[0.25em] uppercase mt-0.5">Peças & Serviços</p>
+            
+            <!-- Menu de Navegação -->
+            <nav class="p-4 space-y-1">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 text-white font-medium transition-colors">
+                    <i class="fa-solid fa-chart-pie w-5"></i> Painel de Controle
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-file-invoice w-5"></i> Orçamentos
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-screwdriver-wrench w-5"></i> Ordens de Serviço
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-box w-5"></i> Estoque de Peças
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-clock-rotate-left w-5"></i> Histórico / Comissões
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-users w-5"></i> Clientes
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-car w-5"></i> Veículos
+                </a>
+            </nav>
         </div>
 
-        <!-- BOTÕES DE NAVEGAÇÃO -->
-        <nav class="flex-1 p-5 space-y-1.5 overflow-y-auto hide-scrollbar">
-            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-blue-600 text-white font-medium text-sm transition-all duration-200 text-left shadow-lg shadow-blue-600/10">
-                <span class="text-base">📊</span> <span>Painel de Controle</span>
-            </button>
-            <button onclick="switchTab('orcamentos')" id="btn-orcamentos" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium text-sm transition-all duration-200 text-left">
-                <span class="text-base">📋</span> <span>Orçamentos</span>
-            </button>
-            <button onclick="switchTab('ordens')" id="btn-ordens" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium text-sm transition-all duration-200 text-left">
-                <span class="text-base">🛠️</span> <span>Ordens de Serviço</span>
-            </button>
-            <button onclick="switchTab('estoque')" id="btn-estoque" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium text-sm transition-all duration-200 text-left">
-                <span class="text-base">📦</span> <span>Estoque de Peças</span>
-            </button>
-            <button onclick="switchTab('historico')" id="btn-historico" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium text-sm transition-all duration-200 text-left">
-                <span class="text-base">📜</span> <span>Histórico / Comissões</span>
-            </button>
-            <button onclick="switchTab('clientes')" id="btn-clientes" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium text-sm transition-all duration-200 text-left">
-                <span class="text-base">👥</span> <span>Clientes</span>
-            </button>
-            <button onclick="switchTab('veiculos')" id="btn-veiculos" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium text-sm transition-all duration-200 text-left">
-                <span class="text-base">🚗</span> <span>Veículos</span>
-            </button>
-        </nav>
+        <!-- Rodapé da Sidebar / Perfil do Usuário -->
+        <div class="p-4 border-t border-gray-800 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center font-semibold text-sm text-blue-400">
+                AD
+            </div>
+            <div>
+                <p class="text-sm font-medium text-white">Administrador</p>
+                <p class="text-xs text-gray-500">admin@carpecas.com</p>
+            </div>
+        </div>
     </aside>
 
-    <!-- ÁREA DE EXIBIÇÃO DE CONTEÚDO -->
-    <main class="flex-1 flex flex-col min-w-0 bg-[#0b0f19]">
-        <!-- BARRA SUPERIOR -->
-        <header class="bg-[#111827] border-b border-slate-800/60 h-18 flex items-center justify-between px-6 md:px-8 flex-shrink-0">
-            <div class="flex items-center space-x-3 w-full max-w-xl">
-                <div class="relative flex-1">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500 text-xs">🔍</span>
-                    <input type="text" id="globalSearch" oninput="handleSearch()" placeholder="Pesquise por clientes, placas, mecânicos..." class="w-full pl-9 pr-4 py-2 bg-[#1f2937] border border-slate-700/60 rounded-xl text-xs focus:outline-none focus:border-blue-500 transition-all placeholder:text-slate-500 font-medium text-slate-100">
-                </div>
-                <button onclick="toggleFiltroAtrasadas()" id="btnFiltroAtrasadas" class="px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-700 transition-all flex items-center space-x-1 whitespace-nowrap">
-                    <span>🚨</span> <span id="labelFiltroAtrasadas">Ver Atrasadas</span>
-                </button>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+        
+        <!-- TOPBAR -->
+        <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 sticky top-0 z-10">
+            <!-- Barra de Pesquisa -->
+            <div class="relative w-64 md:w-80">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input type="text" placeholder="Buscar no sistema..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 transition-colors">
             </div>
-            <div class="flex items-center space-x-2 ml-4">
-                <button onclick="exportarRelatorio('pdf')" class="px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-700 transition-all">📄 PDF</button>
-                <button onclick="exportarRelatorio('csv')" class="px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-700 transition-all">📊 Excel</button>
+
+            <!-- Ações Globais -->
+            <div class="flex items-center gap-4">
+                <button class="flex items-center gap-2 px-3 py-2 border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 font-medium rounded-lg text-xs transition-colors">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Ver Atrasadas
+                </button>
+                <div class="h-6 w-px bg-gray-200"></div>
+                <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors" title="Exportar para PDF">
+                    <i class="fa-solid fa-file-pdf text-lg text-red-500"></i>
+                </button>
+                <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors" title="Exportar para Excel">
+                    <i class="fa-solid fa-file-excel text-lg text-green-600"></i>
+                </button>
             </div>
         </header>
 
-        <!-- CONTEÚDO DINÂMICO -->
-        <div class="p-6 md:p-8 flex-1 overflow-y-auto">
-            <div id="estoqueAlertaGlobal" class="hidden mb-6 p-4 bg-rose-950/40 border border-rose-800/60 rounded-2xl flex items-center space-x-3 text-rose-300">
-                <span class="text-lg">🚨</span>
-                <div class="text-xs font-medium">Aviso de Estoque: Existem itens abaixo do limite de segurança!</div>
+        <!-- CONTAINER DO CONTEÚDO -->
+        <div class="p-6 space-y-6 max-w-7xl w-full mx-auto">
+            
+            <!-- ALERTA DE ESTOQUE (Critico) -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl flex items-start gap-3 shadow-sm">
+                <i class="fa-solid fa-circle-exclamation text-amber-500 text-xl mt-0.5"></i>
+                <div>
+                    <h4 class="font-semibold text-amber-900 text-sm">Aviso de Estoque</h4>
+                    <p class="text-amber-700 text-xs mt-0.5">Existem itens abaixo do limite de segurança! Revise o estoque de peças.</p>
+                </div>
             </div>
 
-            <!-- DASHBOARD -->
-            <section id="tab-dashboard" class="space-y-6 tab-content">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-[#111827] p-6 rounded-2xl border border-slate-800/60 shadow-xs flex items-center justify-between">
-                        <div>
-                            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Faturamento Líquido</p>
-                            <h3 id="dashFaturamento" class="text-2xl font-bold text-white mt-1">R$ 0,00</h3>
-                        </div>
-                        <div class="w-12 h-12 bg-emerald-950 text-emerald-400 rounded-xl flex items-center justify-center text-lg">💰</div>
+            <!-- CARDS DE MÉTRICAS (KPIs) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Faturamento Líquido -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+                    <div class="space-y-2">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Faturamento Líquido</span>
+                        <h3 class="text-3xl font-bold text-gray-900">R$ 0,00</h3>
+                        <span class="text-xs text-gray-500 flex items-center gap-1">
+                            <i class="fa-solid fa-arrow-trend-up text-green-500"></i> Mês atual
+                        </span>
                     </div>
-                    <div class="bg-[#111827] p-6 rounded-2xl border border-slate-800/60 shadow-xs flex items-center justify-between">
-                        <div>
-                            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Carros no Pátio</p>
-                            <h3 id="dashAndamento" class="text-2xl font-bold text-white mt-1">0 Carros</h3>
-                        </div>
-                        <div class="w-12 h-12 bg-blue-950 text-blue-400 rounded-xl flex items-center justify-center text-lg">🛠️</div>
-                    </div>
-                    <div class="bg-[#111827] p-6 rounded-2xl border border-slate-800/60 shadow-xs flex items-center justify-between">
-                        <div>
-                            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Orçamentos Pendentes</p>
-                            <h3 id="dashPendentes" class="text-2xl font-bold text-white mt-1">0 Propostas</h3>
-                        </div>
-                        <div class="w-12 h-12 bg-amber-950 text-amber-400 rounded-xl flex items-center justify-center text-lg">⏳</div>
+                    <div class="bg-green-50 p-4 rounded-xl text-green-600">
+                        <i class="fa-solid fa-dollar-sign text-2xl"></i>
                     </div>
                 </div>
-                <div class="bg-[#111827] p-6 rounded-2xl border border-slate-800/60">
-                    <h3 class="text-sm font-bold text-white mb-4">Fluxo de Caixa Mensal</h3>
-                    <div class="h-64 relative"><canvas id="faturamentoChart"></canvas></div>
-                </div>
-            </section>
 
-            <!-- TABELAS PADRÃO DO SISTEMA (GERADO VIA SCRIPT AUTOMÁTICO) -->
-            <section id="tab-orcamentos" class="hidden space-y-6 tab-content">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <h2 class="text-base font-bold text-white">Módulo de Orçamentos</h2>
+                <!-- Carros no Pátio -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+                    <div class="space-y-2">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Carros no Pátio</span>
+                        <h3 class="text-3xl font-bold text-gray-900">0 Carros</h3>
+                        <span class="text-xs text-gray-500 flex items-center gap-1">
+                            <i class="fa-solid fa-circle text-blue-500 text-[8px]"></i> Capacidade livre
+                        </span>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-xl text-blue-600">
+                        <i class="fa-solid fa-car text-2xl"></i>
+                    </div>
+                </div>
+
+                <!-- Orçamentos Pendentes -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+                    <div class="space-y-2">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Orçamentos Pendentes</span>
+                        <h3 class="text-3xl font-bold text-gray-900">0 Propostas</h3>
+                        <span class="text-xs text-amber-600 flex items-center gap-1 font-medium">
+                            <i class="fa-solid fa-clock"></i> Aguardando aprovação
+                        </span>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-xl text-amber-600">
+                        <i class="fa-solid fa-file-lines text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO DE FLUXO E MÓDULOS -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Fluxo de Caixa Mensal -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm lg:col-span-2 flex flex-col justify-between min-h-[300px]">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-blue-600"></i>
+                            <h3 class="font-bold text-gray-900">Fluxo de Caixa Mensal</h3>
+                        </div>
+                        <span class="text-xs bg-gray-100 px-2.5 py-1 rounded-full text-gray-600 font-medium">Últimos 6 meses</span>
+                    </div>
+                    <!-- Placeholder Visual para Gráfico -->
+                    <div class="flex-1 flex flex-col items-center justify-center text-gray-400 py-10">
+                        <i class="fa-solid fa-chart-bar text-4xl mb-3 text-gray-300"></i>
+                        <p class="text-sm font-medium">Nenhum dado financeiro registrado neste mês</p>
+                        <p class="text-xs text-gray-400 mt-1">Os gráficos aparecerão assim que houver faturamento.</p>
+                    </div>
+                </div>
+
+                <!-- Módulo de Orçamentos -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between min-h-[300px]">
+                    <div class="border-b border-gray-100 pb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-paste text-blue-600"></i>
+                            <h3 class="font-bold text-gray-900">Módulo de Orçamentos</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col items-center justify-center text-center p-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-plus text-lg"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-800 text-sm">Criar nova proposta</h4>
+                        <p class="text-xs text-gray-400 max-w-[200px] mx-auto mt-1">Gere orçamentos rápidos para novos clientes e veículos.</p>
+                    </div>
+
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-xl text-sm transition-colors shadow-sm shadow-blue-100">
+                        Novo Orçamento
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
